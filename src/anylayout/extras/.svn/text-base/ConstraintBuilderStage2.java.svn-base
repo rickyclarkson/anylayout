@@ -1,0 +1,9 @@
+package anylayout.extras;
+
+import anylayout.LayoutContext;
+import fpeas.function.Function;
+
+public interface ConstraintBuilderStage2
+{
+	ConstraintBuilderStage3 setTop(Function<? super LayoutContext,Integer> top);
+}

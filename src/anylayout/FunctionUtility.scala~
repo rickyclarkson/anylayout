@@ -1,0 +1,4 @@
+package anylayout
+
+object FunctionUtility { def constant[T, R](r: R): T => R = t => r
+                         def constIfNothing[T, R](o: Option[T], or: R, f: T => R) = o.map(f).getOrElse(or) }

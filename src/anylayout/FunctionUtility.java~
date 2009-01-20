@@ -1,0 +1,23 @@
+package anylayout;
+
+import fj.F;
+import fj.data.Option;
+
+public final class FunctionUtility
+{
+    public static R <T, R> constIfNothing(Option<T> o, R or, F<T, R> f)
+    {
+        return o.map(f).getOrElse(or);
+    }
+
+    public static <T> F<T, Integer> minus(final F<T, Integer> f, final F<T, Integer> g)
+    {
+        return new F<T, Integer>()
+        {
+            public Integer f(T t)
+            {
+                return f.f(t)-g.f(t);
+            }
+        };
+    }
+}

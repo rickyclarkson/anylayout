@@ -1,0 +1,9 @@
+package anylayout.extras;
+
+import anylayout.LayoutContext;
+import scala.Function1;
+
+public interface ConstraintBuilderStage1
+{
+	ConstraintBuilderStage2 setLeft(Function1<? super LayoutContext,Integer> left);
+}

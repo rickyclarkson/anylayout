@@ -1,0 +1,17 @@
+package anylayout.extras;
+
+import java.awt.Component;
+import fpeas.maybe.Maybe;
+
+public interface BorderLayoutEmulation
+{
+	BorderLayoutEmulation setNorth(Maybe<Component> north);
+
+	BorderLayoutEmulation setSouth(Maybe<Component> south);
+
+	BorderLayoutEmulation setEast(Maybe<Component> east);
+
+	BorderLayoutEmulation setWest(Maybe<Component> west);
+
+	BorderLayoutEmulation setCentre(Maybe<Component> centre);
+}
