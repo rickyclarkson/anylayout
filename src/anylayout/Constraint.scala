@@ -1,10 +1,5 @@
 package anylayout;
 
-import fj.F;
+case class Constraint(left: LayoutContext => Int, top: LayoutContext => Int,
+                      width: LayoutContext => Int, height: LayoutContext => Int)
 
-trait Constraint {
- def getLeft: F[LayoutContext,Integer]
- def getTop: F[LayoutContext, Integer]
- def getWidth: F[LayoutContext, Integer]
- def getHeight: F[LayoutContext, Integer]
-}

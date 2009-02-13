@@ -1,13 +1,12 @@
 package anylayout
 
 import anylayout.util.MapUtility
-import fj.F
 
 import java.awt.{Component, Container, Dimension, LayoutManager2}
 import java.util.{HashMap, Map}
 
 object AnyLayout {
- def useAnyLayout(container: Container, alignmentX: Float, alignmentY: Float, calculator: SizeCalculator, ifMissingConstraint: F[Component, Constraint]) {
+ def useAnyLayout(container: Container, alignmentX: Float, alignmentY: Float, calculator: SizeCalculator, ifMissingConstraint: Component => Constraint) {
   val constraints = new HashMap[Component, Constraint]
   val layout = new LayoutManager2 {
    def addLayoutComponent(comp: Component, constraint: Object) = constraints.put(comp, constraint.asInstanceOf[Constraint])
@@ -31,18 +30,21 @@ object AnyLayout {
                                       def getPreferredSize = { val preferredSize = component.getPreferredSize
                                                                if (isX) preferredSize.width else preferredSize.height }
                                       def getLayoutInfo(component1: Component): LayoutInfo = getInfo(component1, isX) }
-    val getConstraint = new F[Component, Constraint] {
-     def f(component1: Component) = MapUtility.get(constraints, component1, ifMissingConstraint)
-    }
+    val getConstraint: Component => Constraint = component1 => MapUtility.get(constraints, component1, ifMissingConstraint)
 
-    new LayoutInfo { def getOffset = { val constraint = getConstraint.f(component)
-                                       if (isX) constraint.getLeft.f(context) else constraint.getTop.f(context) }
+    new LayoutInfo { def getOffset = { val constraint = getConstraint(component)
+                                       constraint.left
+                                       println(constraint)
+                                       println(constraint.left)
+                                       constraint.left(context)
+                                       constraint.top(context)                                       
+                                       if (isX) constraint.left(context) else constraint.top(context) }
                      def getFarOffset = {
-                      val constraint = getConstraint.f(component)
-                      if (isX) { val left = constraint.getLeft
-                                 val width = constraint.getWidth
-                                 left.f(context).intValue + width.f(context).intValue }
-                      else constraint.getTop.f(context).intValue + constraint.getHeight.f(context).intValue
+                      val constraint = getConstraint(component)
+                      if (isX) { val left = constraint.left
+                                 val width = constraint.width
+                                 left(context).intValue + width(context).intValue }
+                      else constraint.top(context).intValue + constraint.height(context).intValue
 		     }
                    }
    }
