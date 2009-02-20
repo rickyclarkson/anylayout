@@ -6,7 +6,7 @@ import javax.swing._
 
 object PercentLayoutExample { def main(args: Array[String]) {
  val frame = new JFrame
- AnyLayout.useAnyLayout(frame, 0.5f, 0.5f, SizeCalculatorUtility.absoluteSize(400, 400), component => throw null)
+ AnyLayout.useAnyLayout(frame, 0.5f, 0.5f, Size(400, 400), component => throw null)
  val constraints = PercentConstraintsUtility.newInstance(frame)
  val dont = new JButton("Don't")
  constraints.add(new JButton("Click"), 5, 5, 20, 20, false, false)

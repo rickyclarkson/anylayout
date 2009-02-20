@@ -22,16 +22,12 @@ object PercentConstraintsUtility {
   new PercentConstraints {
    def add(component: Component, left: Int, top: Int, width: Int, height: Int, stretchWidth: Boolean, stretchHeight: Boolean) = {
     constraints.put(component, component -> new Dimension(width, height))
-    container.add(component, ConstraintBuilder.buildConstraint.setLeft(_.getParentSize * left / 100).setTop(_.getParentSize * top / 100).setWidth(percentSize(stretchWidth, width)).setHeight(percentSize(stretchHeight, height)))
+    container.add(component, ConstraintBuilder.buildConstraint.setLeft(_.parentSize * left / 100).setTop(_.parentSize * top / 100).setWidth(percentSize(stretchWidth, width)).setHeight(percentSize(stretchHeight, height)))
    }
-
-   def getSizeCalculator = new SizeCalculator {
-    def getHeight = getASize(_.height).intValue
-    def getASize(dimension: Dimension => Int) = max((c: Component) => dimension(getPreferredParentSize(constraints.get(c))))
-    def getWidth = getASize(_.width).intValue
-   }
+   def getASize(dimension: Dimension => Int) = max((c: Component) => dimension(getPreferredParentSize(constraints.get(c))))
+   def size = Size(getASize(_.width), getASize(_.height))
   }
  }
 
- def percentSize(stretch: Boolean, size: Int): LayoutContext => Int = context => if (stretch) context.getParentSize * size / 100 else Math.min(context.getParentSize * size / 100, context.getPreferredSize)
+ def percentSize(stretch: Boolean, size: Int): LayoutContext => Int = context => if (stretch) context.parentSize * size / 100 else Math.min(context.parentSize * size / 100, context.preferredSize)
 }

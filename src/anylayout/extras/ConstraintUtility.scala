@@ -15,7 +15,7 @@ import java.awt.Component
 object ConstraintUtility
 {
   private def parentSizeMinus(function: LayoutContext => Int): LayoutContext => Int =
-   context => context.getParentSize.intValue-function(context).intValue
+   context => context.parentSize.intValue-function(context).intValue
 
  private val intConstant: Int => (LayoutContext => Int) = x => (y => x)
 
@@ -26,14 +26,14 @@ object ConstraintUtility
   topLeft(parentSizeMinus(preferredSizePlus(bottom)), left)
 
  private def preferredSizePlus(function: LayoutContext => Int): LayoutContext => Int =
-  context => context.getPreferredSize + function(context).intValue
+  context => context.preferredSize + function(context).intValue
 
  def bottomCentre(bottom: LayoutContext => Int) =
   buildPartOfCentreConstraint setTop bottomOf(bottom) setWidth preferredSize setHeight preferredSize
 
  private lazy val buildPartOfCentreConstraint = buildConstraint setLeft getLeftCoordinateAsIfCentre
 
- private lazy val getLeftCoordinateAsIfCentre: LayoutContext => Int = context => (context.getParentSize - context.getPreferredSize) / 2
+ private lazy val getLeftCoordinateAsIfCentre: LayoutContext => Int = context => (context.parentSize - context.preferredSize) / 2
 
  def topCentre(top: Int) = buildPartOfCentreConstraint setTop intConstant(top) setWidth preferredSize setHeight preferredSize
 
@@ -43,7 +43,7 @@ object ConstraintUtility
  def bottomOf(bottom: LayoutContext => Int) = farSide(bottom)
 
  def topRight(top: LayoutContext => Int, right: LayoutContext => Int) =
-  buildConstraint setLeft (context => context.getParentSize - context.getPreferredSize - right(context).intValue) setTop top setWidth preferredSize setHeight preferredSize
+  buildConstraint setLeft (context => context.parentSize - context.preferredSize - right(context).intValue) setTop top setWidth preferredSize setHeight preferredSize
 
  def farSide(padding: LayoutContext => Int) = minus(minus(getParentSize, padding), LayoutContextUtility.getPreferredSize)
  def typicalDefaultConstraint(exceptionHandler: Runnable): Component => Constraint = component => {
