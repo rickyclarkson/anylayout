@@ -1,9 +1,0 @@
-package anylayout.extras;
-
-import anylayout.LayoutContext;
-import fpeas.function.Function;
-
-public interface ConstraintBuilderStage1
-{
-	ConstraintBuilderStage2 setLeft(Function<? super LayoutContext,Integer> left);
-}

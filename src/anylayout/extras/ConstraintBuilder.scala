@@ -6,7 +6,8 @@ import java.awt.Component
 object ConstraintBuilder
 {
  def buildWithSameLeftAsTop(leftAndTop: LayoutContext => Int): ConstraintBuilderStage3 = buildConstraint setLeft leftAndTop setTop leftAndTop
- def buildConstraint: ConstraintBuilderStage1 = new ConstraintBuilderStage1 { def setLeft(left: LayoutContext => Int): ConstraintBuilderStage2 =
+ def buildConstraint: ConstraintBuilderStage1 = new ConstraintBuilderStage1 { def setLeft(left: LayoutContext => Int): ConstraintBuilderStage2 = {
+  if (left == null) throw null
   new ConstraintBuilderStage2 { def setTop(top: LayoutContext => Int): ConstraintBuilderStage3 =
    new ConstraintBuilderStage3 { def setWidth(width: LayoutContext => Int): ConstraintBuilderStage4 = 
     new ConstraintBuilderStage4 { def setHeight(height: LayoutContext => Int): Constraint = 
@@ -14,7 +15,8 @@ object ConstraintBuilder
                                 }
                                }
                               }
-                                                   }
+ } }
+                                                                            
 
  val preferredSize: LayoutContext => Int = _.getPreferredSize
  val fill: LayoutContext => Int = _.getParentSize

@@ -33,11 +33,6 @@ object AnyLayout {
     val getConstraint: Component => Constraint = component1 => MapUtility.get(constraints, component1, ifMissingConstraint)
 
     new LayoutInfo { def getOffset = { val constraint = getConstraint(component)
-                                       constraint.left
-                                       println(constraint)
-                                       println(constraint.left)
-                                       constraint.left(context)
-                                       constraint.top(context)                                       
                                        if (isX) constraint.left(context) else constraint.top(context) }
                      def getFarOffset = {
                       val constraint = getConstraint(component)

@@ -1,0 +1,12 @@
+package anylayout.extras
+
+import anylayout._
+import anylayout.extras._
+import javax.swing._
+
+object PercentLayoutExample { def main(args: Array[String]) {
+ val frame = new JFrame
+ AnyLayout.useAnyLayout(frame, 0.5f, 0.5f, SizeCalculatorUtility.absoluteSize(400, 400), component => throw null)
+ frame.pack
+ frame setVisible true
+} }

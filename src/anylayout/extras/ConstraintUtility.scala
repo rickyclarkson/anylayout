@@ -31,9 +31,9 @@ object ConstraintUtility
  def bottomCentre(bottom: LayoutContext => Int) =
   buildPartOfCentreConstraint setTop bottomOf(bottom) setWidth preferredSize setHeight preferredSize
 
- private val buildPartOfCentreConstraint = buildConstraint setLeft getLeftCoordinateAsIfCentre
+ private lazy val buildPartOfCentreConstraint = buildConstraint setLeft getLeftCoordinateAsIfCentre
 
- private val getLeftCoordinateAsIfCentre: LayoutContext => Int = context => (context.getParentSize - context.getPreferredSize) / 2
+ private lazy val getLeftCoordinateAsIfCentre: LayoutContext => Int = context => (context.getParentSize - context.getPreferredSize) / 2
 
  def topCentre(top: Int) = buildPartOfCentreConstraint setTop intConstant(top) setWidth preferredSize setHeight preferredSize
 
