@@ -29,5 +29,5 @@ object PercentConstraintsUtility {
   }
  }
 
- def percentSize(stretch: Boolean, size: Int): LayoutContext => Int = context => if (stretch) context.parentSize * size / 100 else Math.min(context.parentSize * size / 100, context.preferredSize)
+ def percentSize(stretch: Boolean, size: Int): LayoutContext => Int = context => if (stretch) context.parentSize * size / 100 else math.min(context.parentSize * size / 100, context.preferredSize)
 }

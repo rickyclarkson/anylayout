@@ -20,7 +20,7 @@ object ConstraintBuilder
 
  val preferredSize: LayoutContext => Int = _.preferredSize
  val fill: LayoutContext => Int = _.parentSize
- def minimum[T](one: T => Int, two: T => Int): T => Int = input => Math.min(one(input).intValue, two(input).intValue)
+ def minimum[T](one: T => Int, two: T => Int): T => Int = input => math.min(one(input).intValue, two(input).intValue)
 
  def after(component: Component): LayoutContext => Int = _.layoutInfoFor(component).getFarOffset
 }

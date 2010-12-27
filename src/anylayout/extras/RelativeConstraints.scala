@@ -16,7 +16,7 @@ object RelativeConstraints {
   val oneInfo = c.layoutInfoFor(one)
   val twoInfo = c.layoutInfoFor(two)
   val tmp = (oneInfo.getFarOffset.intValue + twoInfo.getOffset.intValue - c.preferredSize) / 2
-  Math.max(0, tmp / 2) }
+  math.max(0, tmp / 2) }
                                                                               ) setTop (context => (after(one, context.layoutInfoFor(two).getOffset.intValue)(context).intValue-context.preferredSize.intValue)/2) setWidth ConstraintBuilder.preferredSize setHeight ConstraintBuilder.preferredSize
 
  def levelWith(horizontal: Component, vertical: Component) = buildConstraintSameLeftAs(vertical).setTop(equalTo(horizontal)).setWidth(ConstraintBuilder.preferredSize).setHeight(ConstraintBuilder.preferredSize)

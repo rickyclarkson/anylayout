@@ -1,6 +1,6 @@
 package anylayout.extras
 
-import FunctionUtility.minus
+import anylayout.FunctionUtility.minus
 import LayoutContextUtility.getParentSize
 import ConstraintBuilder.preferredSize
 import anylayout.Constraint
